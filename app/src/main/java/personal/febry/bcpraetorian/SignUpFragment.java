@@ -73,7 +73,7 @@ public class SignUpFragment extends Fragment {
         user.updateProfile((new UserProfileChangeRequest.Builder()).setDisplayName(name).build());
         SharedPreferences spUser = requireActivity().getSharedPreferences("user",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = spUser.edit();
-        editor.putString("Name", user.getDisplayName());
+        editor.putString("Name", name);
         editor.putString("Email", user.getEmail());
         editor.putString("UID", user.getUid());
         editor.apply();
