@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Praetorian">
         <activity
+            android:name=".DescriptionActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".UserActivity"
             android:exported="true"
             android:screenOrientation="portrait"

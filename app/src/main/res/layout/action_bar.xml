@@ -6,7 +6,7 @@
     android:id="@+id/ab_mainactivity"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="70dp"
     android:background="@color/pepe"
     app:contentInsetEnd="0dp"
     app:contentInsetStart="0dp">

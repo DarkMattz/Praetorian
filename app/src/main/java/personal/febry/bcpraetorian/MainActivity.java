@@ -2,16 +2,26 @@ package personal.febry.bcpraetorian;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity {
 
     private boolean backPressed = false;
     private ImageView imgUser;
+    private StorageReference storage;
+    private FloatingActionButton btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +30,26 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.ab_mainactivity));
         assignAll();
         onClickListener();
+        uploadTest();
+    }
+
+    private void uploadTest() {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        String extension = mime.getExtensionFromMimeType(null);
     }
 
     private void onClickListener() {
         imgUser.setOnClickListener(imgUserListener());
+        btnAdd.setOnClickListener(addListener());
+    }
+
+    private View.OnClickListener addListener() {
+        return view -> {
+            Intent intent = new Intent(this, DescriptionActivity.class);
+            intent.putExtra("IS_ADD", 1);
+            startActivity(intent);
+        };
     }
 
     private View.OnClickListener imgUserListener() {
@@ -35,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void assignAll() {
         imgUser = findViewById(R.id.img_user);
+        btnAdd = findViewById(R.id.btn_add);
     }
 
     @Override

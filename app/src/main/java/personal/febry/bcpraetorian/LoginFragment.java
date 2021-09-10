@@ -38,20 +38,27 @@ public class LoginFragment extends Fragment {
         return view -> {
             tvError.setVisibility(View.GONE);
             FirebaseAuth userAuth = FirebaseAuth.getInstance();
-            userAuth.signInWithEmailAndPassword(etEmail.getEditText().getText().toString(), etPassword.getEditText().getText().toString())
-                        .addOnCompleteListener(requireActivity(), task -> {
-                            if(task.isSuccessful()){
-                                updateProfile();
-                                Intent intent = new Intent(requireActivity(), MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
+            String email = etEmail.getEditText().getText().toString(),
+                    password = etPassword.getEditText().getText().toString();
+            if(!email.equals("") && !password.equals("")){
+                userAuth.signInWithEmailAndPassword(etEmail.getEditText().getText().toString(), etPassword.getEditText().getText().toString())
+                            .addOnCompleteListener(requireActivity(), task -> {
+                                if(task.isSuccessful()){
+                                    updateProfile();
+                                    Intent intent = new Intent(requireActivity(), MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
 
-                            } else {
-                                tvError.setText(task.getException().getMessage());
-                                tvError.setVisibility(View.VISIBLE);
-                            }
-                        });
+                                } else {
+                                    tvError.setText(task.getException().getMessage());
+                                    tvError.setVisibility(View.VISIBLE);
+                                }
+                            });
+            } else {
+                tvError.setText("Please input your email and password");
+                tvError.setVisibility(View.VISIBLE);
+            }
         };
     }
 
