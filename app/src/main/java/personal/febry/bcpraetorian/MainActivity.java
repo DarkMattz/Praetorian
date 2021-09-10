@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements MainRVAdapter.Cli
             Intent intent = new Intent(this, DescriptionActivity.class);
             intent.putExtra("IS_ADD", 1);
             startActivity(intent);
+            imageDatas.clear();
         };
     }
 
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements MainRVAdapter.Cli
         return view -> {
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);
+            imageDatas.clear();
         };
     }
 
@@ -121,5 +123,6 @@ public class MainActivity extends AppCompatActivity implements MainRVAdapter.Cli
         intent.putExtra("Description",imageDatas.get(position).getDescription());
         intent.putExtra("URL",imageDatas.get(position).getUrl());
         startActivity(intent);
+        imageDatas.clear();
     }
 }
