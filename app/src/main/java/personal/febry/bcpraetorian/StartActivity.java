@@ -2,16 +2,16 @@ package personal.febry.bcpraetorian;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import personal.febry.bcpraetorian.data.UserData;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -34,17 +34,10 @@ public class StartActivity extends AppCompatActivity {
 
     private void instantLogin() {
         if(userAuth.getCurrentUser() != null){
-            UserData user = updateUser();
             Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("USER", user);
             startActivity(intent);
             finish();
         }
-    }
-
-    private UserData updateUser() {
-        FirebaseUser user = userAuth.getCurrentUser();
-        return new UserData(user.getDisplayName(), user.getUid(), user.getEmail());
     }
 
     private View.OnClickListener btnLoginListener() {

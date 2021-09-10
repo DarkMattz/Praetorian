@@ -30,7 +30,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private View.OnClickListener closeListener() {
-        return view -> startActivity(new Intent(this, StartActivity.class));
+        return view -> super.onBackPressed();
     }
 
     private void assignAll() {

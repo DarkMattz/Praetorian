@@ -1,22 +1,17 @@
 package personal.febry.bcpraetorian;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import personal.febry.bcpraetorian.data.UserData;
 
 public class MainActivity extends AppCompatActivity {
 
     private boolean backPressed = false;
-    UserData user;
+    private ImageView imgUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +19,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.ab_mainactivity));
         assignAll();
+        onClickListener();
+    }
+
+    private void onClickListener() {
+        imgUser.setOnClickListener(imgUserListener());
+    }
+
+    private View.OnClickListener imgUserListener() {
+        return view -> {
+            Intent intent = new Intent(this, UserActivity.class);
+            startActivity(intent);
+        };
     }
 
     private void assignAll() {
-        user = (UserData) getIntent().getSerializableExtra("USER");
-
+        imgUser = findViewById(R.id.img_user);
     }
 
     @Override

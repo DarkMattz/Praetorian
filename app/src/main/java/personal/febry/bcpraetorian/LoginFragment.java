@@ -1,6 +1,8 @@
 package personal.febry.bcpraetorian;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,6 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-
-import personal.febry.bcpraetorian.data.UserData;
 
 public class LoginFragment extends Fragment {
 
@@ -42,9 +41,8 @@ public class LoginFragment extends Fragment {
             userAuth.signInWithEmailAndPassword(etEmail.getEditText().getText().toString(), etPassword.getEditText().getText().toString())
                         .addOnCompleteListener(requireActivity(), task -> {
                             if(task.isSuccessful()){
-                                UserData user = updateProfile();
+                                updateProfile();
                                 Intent intent = new Intent(requireActivity(), MainActivity.class);
-                                intent.putExtra("USER", user);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
@@ -57,9 +55,14 @@ public class LoginFragment extends Fragment {
         };
     }
 
-    private UserData updateProfile() {
+    private void updateProfile() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        return new UserData(user.getDisplayName(), user.getUid(), user.getEmail());
+        SharedPreferences spUser = requireActivity().getSharedPreferences("user",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = spUser.edit();
+        editor.putString("Name", user.getDisplayName());
+        editor.putString("Email", user.getEmail());
+        editor.putString("UID", user.getUid());
+        editor.apply();
     }
 
     private void assignAll(View view) {
