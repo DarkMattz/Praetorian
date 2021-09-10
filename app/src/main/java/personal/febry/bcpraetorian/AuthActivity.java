@@ -3,34 +3,29 @@ package personal.febry.bcpraetorian;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class AuthActivity extends AppCompatActivity {
 
-    TextView tvQuestion, tvContext;
-    ImageView imgClose;
+    private TextView tvQuestion, tvContext;
+    private ImageView imgClose;
 
-    @SuppressLint("SourceLockedOrientationActivity")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        assignAllView();
+        assignAll();
         imgClose.setOnClickListener(closeListener());
     }
 
@@ -38,7 +33,7 @@ public class AuthActivity extends AppCompatActivity {
         return view -> startActivity(new Intent(this, StartActivity.class));
     }
 
-    private void assignAllView() {
+    private void assignAll() {
         imgClose = findViewById(R.id.image_close);
         tvQuestion = findViewById(R.id.tv_question);
         tvContext = findViewById(R.id.tv_context);

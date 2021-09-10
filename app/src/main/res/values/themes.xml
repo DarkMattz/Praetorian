@@ -5,4 +5,10 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/pepe</item>
     </style>
+
+    <style name="Theme.Praetorian.MainActivity" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryDark">#3E5325</item>
+    </style>
+
 </resources>

@@ -2,28 +2,49 @@ package personal.febry.bcpraetorian;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import personal.febry.bcpraetorian.data.UserData;
 
 public class StartActivity extends AppCompatActivity {
 
-    Button btnLogin, btnSignUp;
+    private Button btnLogin, btnSignUp;
+    private FirebaseAuth userAuth;
 
-    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        //For better display, the app will be locked into portrait mode.
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        assignAll();
+        instantLogin();
+        setOnclickListener();
+    }
 
-        assignAllView();
+    private void setOnclickListener() {
         btnSignUp.setOnClickListener(btnSignUpListener());
         btnLogin.setOnClickListener(btnLoginListener());
+    }
+
+    private void instantLogin() {
+        if(userAuth.getCurrentUser() != null){
+            UserData user = updateUser();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("USER", user);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    private UserData updateUser() {
+        FirebaseUser user = userAuth.getCurrentUser();
+        return new UserData(user.getDisplayName(), user.getUid(), user.getEmail());
     }
 
     private View.OnClickListener btnLoginListener() {
@@ -42,8 +63,9 @@ public class StartActivity extends AppCompatActivity {
         };
     }
 
-    private void assignAllView() {
+    private void assignAll() {
         btnLogin = findViewById(R.id.btn_login);
-        btnSignUp = findViewById(R.id.btn_signup);
+        btnSignUp = findViewById(R.id.btn_sign_up);
+        userAuth = FirebaseAuth.getInstance();
     }
 }
