@@ -9,7 +9,8 @@ import android.widget.ImageView;
 public class DescriptionActivity extends AppCompatActivity {
 
     private ImageView imgClose;
-    
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
