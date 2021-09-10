@@ -16,15 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import personal.febry.bcpraetorian.data.ImageData;
 
@@ -115,7 +112,7 @@ public class AddFragment extends Fragment {
 
     private void assignAll(View view) {
         btnUpload = view.findViewById(R.id.btn_upload);
-        addPhoto = view.findViewById(R.id.image_add);
+        addPhoto = view.findViewById(R.id.image_content);
         etName = view.findViewById(R.id.et_name);
         etDescription = view.findViewById(R.id.et_description);
         storage = FirebaseStorage.getInstance().getReference("images");

@@ -8,7 +8,7 @@
 
     <style name="Theme.Praetorian.MainActivity" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimaryDark">#3E5325</item>
+        <item name="colorPrimaryDark">@color/darker_pepe</item>
     </style>
 
 </resources>

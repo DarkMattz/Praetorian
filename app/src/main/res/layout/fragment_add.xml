@@ -9,7 +9,7 @@
 <!--    The imageview is bugged up for some unknown reason-->
 
     <ImageView
-        android:id="@+id/image_add"
+        android:id="@+id/image_content"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginBottom="16dp"
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/et_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_add">
+        app:layout_constraintTop_toBottomOf="@+id/image_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

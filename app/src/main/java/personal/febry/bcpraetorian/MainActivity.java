@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,19 +17,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import personal.febry.bcpraetorian.data.ImageData;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainRVAdapter.ClickListener {
 
     private boolean backPressed = false;
     private ImageView imgUser;
-    private StorageReference storage;
     private FloatingActionButton btnAdd;
 
     private RecyclerView rvLayout;
@@ -59,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     ImageData image = i.getValue(ImageData.class);
                     imageDatas.add(image);
                 }
-                rvAdapter = new MainRVAdapter(MainActivity.this, imageDatas);
+                rvAdapter = new MainRVAdapter(MainActivity.this, imageDatas, MainActivity.this);
                 rvLayout.setAdapter(rvAdapter);
             }
 
@@ -116,5 +111,15 @@ public class MainActivity extends AppCompatActivity {
                 backPressed = false;
             }, "DoublePress Thread").start();
         }
+    }
+
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(this, DescriptionActivity.class);
+        intent.putExtra("Name",imageDatas.get(position).getName());
+        intent.putExtra("Author",imageDatas.get(position).getAuthor());
+        intent.putExtra("Description",imageDatas.get(position).getDescription());
+        intent.putExtra("URL",imageDatas.get(position).getUrl());
+        startActivity(intent);
     }
 }

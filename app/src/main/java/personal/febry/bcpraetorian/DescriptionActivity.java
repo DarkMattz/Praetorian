@@ -27,6 +27,10 @@ public class DescriptionActivity extends AppCompatActivity {
         imgClose = findViewById(R.id.image_close);
         switch (getIntent().getExtras().getInt("IS_ADD")){
             case 0 :
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .add(R.id.fragment_description, LookFragment.class, null)
+                        .commit();
                 break;
             case 1 :
                 getSupportFragmentManager().beginTransaction()
